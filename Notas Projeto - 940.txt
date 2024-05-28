@@ -1,0 +1,100 @@
+PROJETO 940 - Analise 
+
+* Tela Alteração Aluguel - Cadastro:
+- Data inicial / Data final: Validar data retroativa;
+- Modal de confirmação Listar somente POS ativa;
+- Incluir obrigatóriedade de Motivo;
+- Incluir aprovação automática de alçada.
+
+* Tela Gestão/Retenção:
+- Toogle On/Off - validar modal de confirmação qndo "Sim" sem data informada;
+- Toogle On/Off - Data inicial / Data final: Validar data retroativa;
+- Preenchendo automático data inicial e final;
+- Não importou a lista de excessão.
+
+
+
+
+------------------------------
+
+
+select * from 
+[Adquirencia].[dbo].[EntidadePontoCapturaHistoricoTemp] 
+
+select * from 
+Adquirencia.masters.InjecaoDebito
+
+select * from
+SGV.dbo.Injecao  where year(DataTransacao) = '2023' order by DataTransacao desc
+
+select * from 
+INTRAFLEX.dbo.AcompanhamentoInjecaoAutomaticaCobranca where year(DataReferencia) = '2023' order by DataReferencia desc
+
+select * from 
+CRMRedeflex.dbo.CampanhaCliente where year(DataCriacao) = '2023' order by DataCriacao desc
+
+
+----------------
+
+[Interação com DEV]
+Data: 30/10/2023
+Nome: Jemerson Juliao
+
+Boa tarde @fernando.souza 
+
+Segue Plano de Testes realizado [PLANO DE TESTES Req.03[Integração]- 940 Politica de Aluguel.docx ],
+conforme falamos, não foi possível realizar o teste devido a um Erro Interno (ERRO 500) o qual aguardamos uma solução para podermos seguir com a homologação.
+
+att,
+
+
+PSC @bruno.vitor @ana.capile @danilo.silva @iago.silva @jaudo.correa @daniel.matos 
+
+-----------
+
+FAturamento recarga
+TPV faturamento mensal
+MDR + RAV
+
+
+-----------------------
+
+
+Adquirencia.dbo.CobrancaDebitoDetalhe **
+Adquirencia.dbo.EntidadePontoCaptura
+Adquirencia.dbo.EntidadePontoCapturaHistorico **
+Adquirencia.dbo.TransacoesSumarizadas
+Adquirencia.masters.ArranjoPagamento
+Adquirencia.masters.Bandeira
+Adquirencia.masters.Estabelecimento
+Adquirencia.masters.InjecaoDebito
+Adquirencia.masters.Terminal
+CRMRedeflex.dbo.Campanha
+CRMRedeflex.dbo.CampanhaCliente **
+CRMRedeflex.dbo.CampanhaClienteDetalhe **
+CRMRedeflex.DBO.CampanhaDetalhe
+CRMRedeflex.DBO.CampanhaTipo
+CRMredeFlex.dbo.Inativacao
+CRMRedeFlex.dbo.MotivoInativacao
+Demanda.dbo.EntidadeValorAluguel_Ref092023
+INTRAFLEX.dbo.BandeiraTipo
+INTRAFLEX.dbo.Cliente
+INTRAFLEX.dbo.ClienteTaxaMDR
+INTRAFLEX.dbo.Colaboradores
+INTRAFLEX.dbo.DDDGestao
+INTRAFLEX.dbo.Diretoria
+INTRAFLEX.dbo.ParametrizacaoImposto
+INTRAFLEX.dbo.ParametrizacaoTaxaIntercambio
+INTRAFLEX.dbo.Regional
+INTRAFLEX.dbo.TaxaMDRCabecalho
+INTRAFLEX.dbo.TaxaMDRTaxas
+INTRAFLEX.dbo.Territorio
+Operadoras.dbo.VendaComercialAgrupadaProdutoFilhoDia
+RedeFlex.dbo.ClientePOSSolicitacao
+RedeFlex.dbo.ClientePOSSolicitacaoDetalhe
+RedeFlex.dbo.ClienteSolicitacaoExcecaoAluguel
+RedeFlex.dbo.DataUltimaVenda
+SGV.dbo.CobrancaHistorico
+SGV.dbo.Injecao
+SGV.dbo.WSProduto
+SGV.dbo.WSUsuario
