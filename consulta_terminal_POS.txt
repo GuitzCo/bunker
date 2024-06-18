@@ -1,0 +1,73 @@
+Select 
+	Eprom, 
+	eq.numeroSerie, 
+	--dataAlocacao = 'dataAlocacao', 
+	idModelo = ModeloId,
+	modelo,
+	--eq.DataLog,
+	eq.DataAlteracaoEstoque,
+	
+idEstoqueOrigem = EstoqueIdOrigem, 
+
+CASE 	
+	 eq.TipoEstoque 
+	 when 1 then 
+	 isNull((
+		select Descricao from INTRAFLEX.GestaoPOS.FilialSuporte ff
+		 where ff.EstoqueId = eq.EstoqueIdOrigem),'')
+	 when 2 then
+	 isNull((
+		select Nome from INTRAFLEX.dbo.Usuarios uu
+		 where uu.UsuarioId = eq.EstoqueIdOrigem),'') END as EstoqueOrigem,
+
+isNull( EstoqueId,'') as idEstoque,
+
+CASE 	
+	 eq.TipoEstoque 
+	 when 1 then 
+	 isNull((
+		select Descricao from INTRAFLEX.GestaoPOS.FilialSuporte ff
+		 where ff.EstoqueId = eq.EstoqueId),'')
+	 when 2 then
+	 isNull((
+		select Nome from INTRAFLEX.dbo.Usuarios uu
+		 where uu.UsuarioId = eq.EstoqueId),'') END as Estoque,
+	
+/*	ELSE 
+	 --isNull(
+	 (	select Nome from INTRAFLEX.dbo.Usuarios uu
+		 where uu.UsuarioId = eq.EstoqueId),
+	
+	
+	whsName = isNull((
+		select Descricao from INTRAFLEX.GestaoPOS.FilialSuporte ff
+		 where ff.EstoqueId = eq.EstoqueIdOrigem),''),
+*/
+	idSituacao = SituacaoId,
+	--Situacao, 
+	nSituacao = (
+		select Descricao from INTRAFLEX.GestaoPOS.Situacao ss 
+		 where ss.SituacaoId = eq.SituacaoId ),
+	idTipoEstoque = TipoEstoque,
+/*	
+	case
+	TipoEstoque
+	when 1 then	'Almoxarifado'
+	when 2 then 'Consultor'
+	when 3 then	'Cliente'
+	when 4 then	'Transito'
+	end as TipoEstoque ,
+*/	
+	TipoEstoq = (select Descricao from INTRAFLEX.GestaoPOS.TipoEstoque tt where tt.TipoEstoqueId = eq.TipoEstoque )
+
+from SGV.dbo.vwTerminalEstabelecimento vwT
+join INTRAFLEX.GestaoPOS.EquipamentoPOSLog eq
+   on (vwT.numeroSerie = eq.NumeroSerie)
+Where ModeloId = '14'
+ and TipoEstoque in (1,2 )
+ --and SituacaoId not in (9, 16)
+
+group by Eprom, eq.numeroSerie,	ModeloId, modelo, eq.DataAlteracaoEstoque, EstoqueId, EstoqueIdOrigem, --DataLog, 
+SituacaoId, TipoEstoque
+
+order by Eprom, DataAlteracaoEstoque desc;
